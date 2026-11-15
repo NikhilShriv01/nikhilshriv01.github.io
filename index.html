@@ -41,12 +41,13 @@ h1,h2,h3{margin:0; font-weight:600; text-wrap:balance}
 
 /* header */
 .top{display:flex; justify-content:space-between; align-items:center; gap:1rem; padding-block:1.4rem}
-.top .me{font-weight:600; font-size:.95rem}
+.top .me{display:inline-grid; place-items:center; width:2.1rem; height:2.1rem; border-radius:8px; background:var(--ink); color:var(--bg); font-weight:700; font-size:.82rem; letter-spacing:-.02em}
+.top .me:hover{background:var(--accent); color:var(--surface)}
 .top nav{display:flex; align-items:center; gap:1.25rem; font-size:.9rem; color:var(--muted)}
 .top nav a:hover{color:var(--ink)}
 .dot-btn{width:1.6rem; height:1.6rem; border-radius:50%; border:1px solid var(--rule); background:var(--surface); cursor:pointer; display:grid; place-items:center; padding:0}
 .dot-btn::after{content:""; width:.7rem; height:.7rem; border-radius:50%; background:linear-gradient(90deg,var(--ink) 50%,transparent 50%); border:1px solid var(--ink)}
-@media (max-width:600px){.top nav a.opt{display:none}}
+@media (max-width:640px){.top nav a.opt{display:none}}
 
 /* intro */
 .intro{display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); gap:2rem 3.5rem; align-items:end; padding-block:clamp(2.75rem,9vw,5.5rem) clamp(2.25rem,5vw,3.5rem)}
@@ -196,6 +197,7 @@ footer{margin-top:3rem; font-size:.78rem; color:var(--faint)}
   .intro>div>*,.glance{animation:up .6s ease both}
   .lead{animation-delay:.06s!important} .status{animation-delay:.12s!important} .switch{animation-delay:.18s!important} .glance{animation-delay:.22s}
 }
+#skills,#work,#experience,#learning,#contact{scroll-margin-top:1.5rem}
 @keyframes gx{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @keyframes gy{from{transform:scaleY(0)}to{transform:scaleY(1)}}
 @keyframes up{from{opacity:.001; transform:translateY(8px)}to{opacity:1; transform:none}}
@@ -205,10 +207,11 @@ footer{margin-top:3rem; font-size:.78rem; color:var(--faint)}
 <body>
 <div class="wrap">
   <header class="top">
-    <span class="me">Nikhil Shrivastava</span>
+    <a class="me" href="#" aria-label="Nikhil Shrivastava, back to top">NS</a>
     <nav aria-label="Links">
       <a href="#skills" class="opt">Skills</a>
       <a href="#work" class="opt">Work</a>
+      <a href="#experience" class="opt">Experience</a>
       <a href="https://www.linkedin.com/in/nikhilshriv01">LinkedIn</a>
       <a href="https://github.com/NikhilShriv01">GitHub</a>
       <button class="dot-btn" id="theme" type="button" aria-label="Switch light or dark theme"></button>
@@ -218,7 +221,7 @@ footer{margin-top:3rem; font-size:.78rem; color:var(--faint)}
   <section class="intro">
     <div>
       <h1>Nikhil<br>Shrivastava</h1>
-      <p class="lead">Data analyst with <b>3+ years</b> of reporting and analytics across telecom, e-commerce and higher education. I work in <b>SQL, Python, PySpark and Power BI</b>, and I learn new tools by shipping with them: Databricks, LangGraph and FastAPI each went into a finished project since August.</p>
+      <p class="lead">Data analyst with <b>3+ years</b> of reporting and analytics across telecom, e-commerce and higher education. I work mostly in <b>SQL, Python, PySpark and Power BI</b>, and I enjoy picking up new tools by building real projects with them.</p>
       <div class="status">
         <span class="live">Open to full-time roles across the US</span>
         <span>M.S. Information Technology, RPI · Dec 2026</span>
@@ -458,7 +461,7 @@ footer{margin-top:3rem; font-size:.78rem; color:var(--faint)}
   </section>
 
   <section class="sec full" id="learning">
-    <div class="side"><h2>Learning log</h2><p>What I picked up, month by month, newest first.</p></div>
+    <div class="side"><h2>Learning log</h2></div>
     <div>
       <ol class="log">
         <li><span class="m">Nov 2026</span><div class="e"><b>Rebuilt the hospital warehouse</b><p>Found a join that counted some hospitals up to 22 times, fixed it, and made the load fail if row counts ever disagree.</p><div class="new"><span>null-safe joins</span><span>load reconciliation</span></div></div></li>
@@ -542,6 +545,26 @@ footer{margin-top:3rem; font-size:.78rem; color:var(--faint)}
     var x=document.createElement('button'); x.id='clear'; x.type='button'; x.textContent='Clear';
     x.addEventListener('click',clear); hint.appendChild(x);
   });});
+
+
+  // smooth glide for in-page links (target re-measured every frame, so late layout shifts can't throw it off)
+  function targetY(el){return el?Math.max(0,Math.min(el.getBoundingClientRect().top+scrollY-16,document.documentElement.scrollHeight-innerHeight)):0;}
+  function glide(el){
+    var start=scrollY, reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var dur=reduce?250:Math.min(900,Math.max(450,Math.abs(targetY(el)-start)*0.45)), t0=null;
+    function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;}
+    function step(ts){ if(t0===null) t0=ts; var p=Math.min(1,(ts-t0)/dur); scrollTo(0,start+(targetY(el)-start)*ease(p)); if(p<1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  }
+  [].slice.call(document.querySelectorAll('a[href^="#"]')).forEach(function(a){
+    a.addEventListener('click',function(e){
+      var id=a.getAttribute('href').slice(1);
+      var el=id?document.getElementById(id):null;
+      if(id && !el) return;
+      e.preventDefault(); glide(el);
+      try{history.replaceState(null,'',id?'#'+id:location.pathname);}catch(err){}
+    });
+  });
 
   // copy email
   var mail=document.getElementById('mail'), note=document.getElementById('copied');
