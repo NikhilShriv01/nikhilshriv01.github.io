@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Nikhil Shrivastava, data analyst. SQL, Python, PySpark and Power BI. Open to full-time roles across the US.">
+<meta property="og:title" content="Nikhil Shrivastava · Data Analyst">
+<meta property="og:description" content="SQL, Python, PySpark and Power BI projects in healthcare, e-commerce, retail, payments and lending.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nikhilshriv01.github.io/">
+<title>Nikhil Shrivastava</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+/* Layout: a quiet index on a strict grid (label column + content column).
+   Breadth is shown, not claimed: a skill explorer lights up every project and job that used a skill,
+   and a dated learning log shows what was picked up, month by month. One accent; one family plus mono for figures. */
+:root{
+  --bg:#F6F6F4; --surface:#FFFFFF; --ink:#141517; --muted:#62656B; --faint:#94979D; --rule:#E2E2DE;
+  --accent:#2D47D6; --accent-soft:#2D47D612; --accent-line:#2D47D640; --live:#1A8A55;
+  --sans:"Schibsted Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#111214; --surface:#18191C; --ink:#ECEDEF; --muted:#A3A6AD; --faint:#70737A; --rule:#27292D;
+  --accent:#8E9DFF; --accent-soft:#8E9DFF16; --accent-line:#8E9DFF55; --live:#4CC98A; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#111214; --surface:#18191C; --ink:#ECEDEF; --muted:#A3A6AD; --faint:#70737A; --rule:#27292D;
+  --accent:#8E9DFF; --accent-soft:#8E9DFF16; --accent-line:#8E9DFF55; --live:#4CC98A; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--ink); font-family:var(--sans); font-size:16px; line-height:1.55; margin:0; -webkit-font-smoothing:antialiased}
+.wrap{max-width:62rem; margin:0 auto; padding-left:max(20px,env(safe-area-inset-left,0px)); padding-right:max(20px,env(safe-area-inset-right,0px)); padding-block:0 3rem}
+a{color:inherit; text-decoration:none}
+h1,h2,h3{margin:0; font-weight:600; text-wrap:balance}
+.num{font-family:var(--mono); font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:3px}
+
+/* header */
+.top{display:flex; justify-content:space-between; align-items:center; gap:1rem; padding-block:1.4rem}
+.top .me{font-weight:600; font-size:.95rem}
+.top nav{display:flex; align-items:center; gap:1.25rem; font-size:.9rem; color:var(--muted)}
+.top nav a:hover{color:var(--ink)}
+.dot-btn{width:1.6rem; height:1.6rem; border-radius:50%; border:1px solid var(--rule); background:var(--surface); cursor:pointer; display:grid; place-items:center; padding:0}
+.dot-btn::after{content:""; width:.7rem; height:.7rem; border-radius:50%; background:linear-gradient(90deg,var(--ink) 50%,transparent 50%); border:1px solid var(--ink)}
+@media (max-width:600px){.top nav a.opt{display:none}}
+
+/* intro */
+.intro{display:grid; grid-template-columns:minmax(0,1.35fr) minmax(0,1fr); gap:2rem 3.5rem; align-items:end; padding-block:clamp(2.75rem,9vw,5.5rem) clamp(2.25rem,5vw,3.5rem)}
+@media (max-width:860px){.intro{grid-template-columns:1fr}}
+.intro>div{min-width:0}
+.intro h1{font-size:clamp(2.7rem,8vw,5.2rem); font-weight:700; letter-spacing:-.045em; line-height:.95}
+.lead{font-size:clamp(1.1rem,2.2vw,1.3rem); color:var(--muted); max-width:40ch; margin:1.4rem 0 0; line-height:1.5; letter-spacing:-.01em}
+.lead b{color:var(--ink); font-weight:500}
+.status{display:flex; flex-wrap:wrap; align-items:center; gap:.5rem 1.25rem; margin-top:1.6rem; font-size:.88rem; color:var(--muted)}
+.live{display:inline-flex; align-items:center; gap:.5rem; color:var(--ink)}
+.live::before{content:""; width:.5rem; height:.5rem; border-radius:50%; background:var(--live); flex:none}
+.switch{display:inline-flex; margin-top:1.8rem; border:1px solid var(--rule); border-radius:999px; padding:3px; background:var(--surface)}
+.switch button{font:inherit; font-size:.82rem; border:0; background:none; color:var(--muted); padding:.4rem .95rem; border-radius:999px; cursor:pointer}
+.switch button[aria-pressed="true"]{background:var(--ink); color:var(--bg)}
+
+/* glance panel */
+.glance{background:var(--surface); border:1px solid var(--rule); border-radius:14px; padding:1.3rem 1.4rem}
+.stats{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.1rem 1.25rem; padding-bottom:1.15rem; border-bottom:1px solid var(--rule)}
+.stat b{display:block; font-family:var(--mono); font-weight:500; font-size:1.65rem; letter-spacing:-.03em; line-height:1.1}
+.stat span{font-size:.8rem; color:var(--muted)}
+.glance .lbl{font-size:.75rem; color:var(--faint); margin:1rem 0 .55rem}
+.inds{display:flex; flex-wrap:wrap; gap:.35rem}
+.inds span{font-size:.8rem; border:1px solid var(--rule); border-radius:999px; padding:.15rem .6rem; color:var(--muted)}
+
+/* sections */
+.sec{display:grid; grid-template-columns:9rem minmax(0,1fr); gap:1rem 2rem; padding-block:2.6rem; border-top:1px solid var(--rule)}
+.sec>.side h2{font-size:.82rem; font-weight:500; color:var(--faint); letter-spacing:.01em; padding-top:.15rem}
+.sec>.side p{font-size:.78rem; color:var(--faint); margin:.4rem 0 0; line-height:1.45}
+.sec>div{min-width:0}
+@media (max-width:720px){.sec{grid-template-columns:1fr; gap:1.1rem}.sec>.side p{max-width:40ch}}
+
+/* skill explorer */
+.sg{display:grid; grid-template-columns:8.5rem minmax(0,1fr); gap:.5rem 1.25rem; align-items:start; margin-bottom:.85rem}
+.sg:last-of-type{margin-bottom:0}
+.sg h3{font-size:.8rem; font-weight:500; color:var(--muted); padding-top:.3rem}
+@media (max-width:540px){.sg{grid-template-columns:1fr; gap:.4rem}}
+.chips{display:flex; flex-wrap:wrap; gap:.4rem}
+.chip{font:inherit; font-size:.84rem; display:inline-flex; align-items:center; gap:.4rem; border:1px solid var(--rule); background:var(--surface); color:var(--ink); border-radius:999px; padding:.28rem .7rem; cursor:pointer; transition:border-color .15s, background .15s, color .15s}
+.chip:hover{border-color:var(--accent-line)}
+.chip i{font-style:normal; font-family:var(--mono); font-size:.68rem; color:var(--faint)}
+.chip[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:var(--surface)}
+.chip[aria-pressed="true"] i{color:var(--surface); opacity:.8}
+.chip.plain{cursor:default; color:var(--muted)}
+.chip.plain:hover{border-color:var(--rule)}
+.hint{display:flex; flex-wrap:wrap; align-items:center; gap:.5rem 1rem; margin-top:1.2rem; font-size:.85rem; color:var(--muted); min-height:1.9rem}
+.hint b{color:var(--ink); font-weight:600}
+#clear{font:inherit; font-size:.8rem; border:0; background:none; color:var(--accent); cursor:pointer; padding:0}
+body.filtering [data-skills].miss{opacity:.28}
+body.filtering [data-skills].hit .t,body.filtering [data-skills].hit h3{color:var(--accent)}
+[data-skills]{transition:opacity .2s}
+
+/* work index */
+.idx{border-top:1px solid var(--rule)}
+.item{border-bottom:1px solid var(--rule)}
+.item summary{list-style:none; cursor:pointer; display:grid; grid-template-columns:minmax(0,1fr) 7rem 8.5rem 1rem; gap:1.25rem; align-items:baseline; padding:1.05rem 0}
+.item summary::-webkit-details-marker{display:none}
+.item summary:hover .t{color:var(--accent)}
+.t{font-weight:600; font-size:1.05rem; letter-spacing:-.01em; transition:color .15s}
+.t small{display:block; font-weight:400; font-size:.85rem; color:var(--muted); letter-spacing:0; margin-top:.15rem}
+.domain{font-size:.85rem; color:var(--muted)}
+.fig{font-family:var(--mono); font-size:.95rem; text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+.chev{width:.6rem; height:.6rem; border-right:1.5px solid var(--faint); border-bottom:1.5px solid var(--faint); transform:rotate(45deg) translateY(-3px); justify-self:end; transition:transform .2s}
+.item[open] .chev{transform:rotate(225deg) translateY(-1px)}
+@media (max-width:640px){.item summary{grid-template-columns:minmax(0,1fr) auto 1rem; gap:.4rem 1rem}.domain{display:none}}
+.body{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,16.5rem); gap:1.5rem 2.5rem; padding:0 0 1.6rem}
+@media (max-width:720px){.body{grid-template-columns:1fr}}
+.body p{margin:0 0 .8rem; color:var(--muted); max-width:58ch}
+.body .stack{font-family:var(--mono); font-size:.75rem; color:var(--faint); margin:0 0 .9rem}
+.body .go{font-size:.88rem; color:var(--accent); border-bottom:1px solid transparent}
+.body .go:hover{border-bottom-color:var(--accent)}
+.viz{min-width:0}
+.viz .cap{font-size:.75rem; color:var(--faint); margin:0 0 .6rem}
+.hb{display:grid; grid-template-columns:5.2rem minmax(0,1fr) 3.4rem; gap:.6rem; align-items:center; font-size:.78rem; color:var(--muted); margin-bottom:.45rem}
+.tr{height:6px; background:var(--rule); border-radius:3px; overflow:hidden}
+.fl{height:100%; background:var(--ink); border-radius:3px; transform-origin:left}
+.fl.ac{background:var(--accent)}
+.hb .num{text-align:right; color:var(--ink); font-size:.76rem}
+.vb{display:flex; align-items:flex-end; gap:.5rem; height:5.5rem; border-bottom:1px solid var(--rule)}
+.vb div{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:.25rem; font-family:var(--mono); font-size:.68rem; color:var(--muted)}
+.vb i{display:block; width:100%; max-width:1.8rem; background:var(--ink); border-radius:2px 2px 0 0; transform-origin:bottom}
+.vl{display:flex; gap:.5rem; margin-top:.3rem}
+.vl span{flex:1; text-align:center; font-size:.68rem; color:var(--faint)}
+.toggle{display:inline-flex; gap:.25rem; margin-bottom:.7rem}
+.toggle button{font:inherit; font-family:var(--mono); font-size:.72rem; border:1px solid var(--rule); background:var(--surface); color:var(--muted); border-radius:999px; padding:.2rem .6rem; cursor:pointer}
+.toggle button[aria-pressed="true"]{border-color:var(--accent); color:var(--accent)}
+
+/* experience */
+.job{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:.15rem 1.5rem; padding-block:0 1.6rem}
+.job:last-child{padding-bottom:0}
+.job h3{font-size:1.02rem; letter-spacing:-.01em; transition:color .15s}
+.job .org{color:var(--muted); font-size:.92rem; grid-column:1}
+.job .when{font-family:var(--mono); font-size:.76rem; color:var(--faint); grid-row:1; grid-column:2; white-space:nowrap; padding-top:.2rem}
+.job ul{grid-column:1/-1; margin:.6rem 0 0; padding-left:1rem; color:var(--muted); font-size:.94rem}
+.job li{margin-bottom:.35rem; max-width:66ch}
+.job li::marker{color:var(--faint)}
+@media (max-width:540px){.job{grid-template-columns:1fr}.job .when{grid-row:auto; grid-column:1; padding-top:0}}
+
+/* learning log */
+.log{list-style:none; margin:0; padding:0; position:relative}
+.log::before{content:""; position:absolute; left:4.6rem; top:.5rem; bottom:.5rem; width:1px; background:var(--rule)}
+.log li{display:grid; grid-template-columns:4rem minmax(0,1fr); gap:1.25rem; padding-bottom:1.15rem; position:relative}
+.log li:last-child{padding-bottom:0}
+.log li::before{content:""; position:absolute; left:calc(4.6rem - 3.5px); top:.45rem; width:8px; height:8px; border-radius:50%; background:var(--bg); border:1.5px solid var(--accent)}
+.log li.past::before{border-color:var(--faint)}
+.log .m{font-family:var(--mono); font-size:.74rem; color:var(--faint); padding-top:.15rem; text-align:left}
+.log .e{padding-left:1rem; min-width:0}
+.log .e b{font-weight:600; font-size:.98rem}
+.log .e p{margin:.15rem 0 0; color:var(--muted); font-size:.9rem; max-width:62ch}
+.log .e .new{display:inline-flex; flex-wrap:wrap; gap:.3rem; margin-top:.4rem}
+.log .e .new span{font-family:var(--mono); font-size:.68rem; color:var(--accent); background:var(--accent-soft); border-radius:4px; padding:.1rem .4rem}
+
+/* education */
+.edu{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:.1rem 1.5rem; margin-bottom:1.1rem}
+.edu:last-child{margin-bottom:0}
+.edu h3{font-size:1rem}
+.edu p{margin:0; color:var(--muted); font-size:.9rem; grid-column:1}
+.edu .when{font-family:var(--mono); font-size:.76rem; color:var(--faint); grid-row:1; grid-column:2; white-space:nowrap; padding-top:.15rem}
+.edu a:hover{color:var(--accent)}
+
+/* 30-second view */
+.brief{display:none}
+body.short .full{display:none}
+body.short .brief{display:block}
+.card{background:var(--surface); border:1px solid var(--rule); border-radius:14px; padding:clamp(1.25rem,3vw,2rem); display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1.5rem 2rem; margin-bottom:2.5rem}
+@media (max-width:720px){.card{grid-template-columns:1fr}}
+.card>div{min-width:0}
+.card .lbl{font-size:.75rem; color:var(--faint); margin:0 0 .35rem}
+.card .val{margin:0; font-size:.95rem}
+.card .big{font-family:var(--mono); font-size:1.5rem; letter-spacing:-.02em; margin:0}
+.card .big+p{margin:.2rem 0 0; color:var(--muted); font-size:.85rem}
+.card .span{grid-column:1/-1; border-top:1px solid var(--rule); padding-top:1.25rem}
+
+/* contact */
+.contact{padding-block:3rem 1rem; border-top:1px solid var(--rule)}
+.contact p{margin:0 0 .6rem; color:var(--faint); font-size:.85rem}
+#mail{font:inherit; font-size:clamp(1.5rem,5vw,2.6rem); font-weight:600; letter-spacing:-.035em; background:none; border:0; padding:0; color:var(--ink); cursor:pointer; text-align:left; overflow-wrap:anywhere; border-bottom:2px solid var(--rule)}
+#mail:hover{border-bottom-color:var(--accent)}
+#copied{font-size:.85rem; color:var(--live); margin-left:.75rem; vertical-align:middle}
+.links{display:flex; gap:1.5rem; margin-top:1.5rem; font-size:.92rem; color:var(--muted)}
+.links a:hover{color:var(--ink)}
+footer{margin-top:3rem; font-size:.78rem; color:var(--faint)}
+
+@media (prefers-reduced-motion:no-preference){
+  .item[open] .fl{animation:gx .7s cubic-bezier(.3,.7,.3,1) both}
+  .item[open] .vb i{animation:gy .6s cubic-bezier(.3,.7,.3,1) both}
+  .fl{transition:width .45s ease}
+  .intro>div>*,.glance{animation:up .6s ease both}
+  .lead{animation-delay:.06s!important} .status{animation-delay:.12s!important} .switch{animation-delay:.18s!important} .glance{animation-delay:.22s}
+}
+@keyframes gx{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes gy{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes up{from{opacity:.001; transform:translateY(8px)}to{opacity:1; transform:none}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="me">Nikhil Shrivastava</span>
+    <nav aria-label="Links">
+      <a href="#skills" class="opt">Skills</a>
+      <a href="#work" class="opt">Work</a>
+      <a href="https://www.linkedin.com/in/nikhilshriv01">LinkedIn</a>
+      <a href="https://github.com/NikhilShriv01">GitHub</a>
+      <button class="dot-btn" id="theme" type="button" aria-label="Switch light or dark theme"></button>
+    </nav>
+  </header>
+
+  <section class="intro">
+    <div>
+      <h1>Nikhil<br>Shrivastava</h1>
+      <p class="lead">Data analyst with <b>3+ years</b> of reporting and analytics across telecom, e-commerce and higher education. I work in <b>SQL, Python, PySpark and Power BI</b>, and I learn new tools by shipping with them: Databricks, LangGraph and FastAPI each went into a finished project since August.</p>
+      <div class="status">
+        <span class="live">Open to full-time roles across the US</span>
+        <span>M.S. Information Technology, RPI · Dec 2026</span>
+        <span>Microsoft PL-300 certified</span>
+      </div>
+      <div class="switch" role="group" aria-label="Page length">
+        <button type="button" id="v-full" aria-pressed="true">Full page</button>
+        <button type="button" id="v-short" aria-pressed="false">30-second version</button>
+      </div>
+    </div>
+    <aside class="glance" aria-label="At a glance">
+      <div class="stats">
+        <div class="stat"><b>3+</b><span>years in analytics roles</span></div>
+        <div class="stat"><b>7</b><span>projects public on GitHub</span></div>
+        <div class="stat"><b>30</b><span>skills used in shipped work</span></div>
+        <div class="stat"><b>109M+</b><span>rows in my largest pipeline</span></div>
+      </div>
+      <p class="lbl">Data I've worked with</p>
+      <div class="inds"><span>Telecom</span><span>Higher ed</span><span>E-commerce</span><span>Healthcare</span><span>Retail</span><span>Payments</span><span>Lending</span><span>Manufacturing</span></div>
+    </aside>
+  </section>
+
+  <!-- 30-second view -->
+  <section class="brief" aria-label="Summary">
+    <div class="card">
+      <div><p class="lbl">Role</p><p class="val">Data, BI or business analyst</p></div>
+      <div><p class="lbl">Open to</p><p class="val">Full-time roles across the US</p></div>
+      <div><p class="lbl">Available</p><p class="val">After M.S. (Dec 2026)</p></div>
+      <div class="span"><p class="lbl">Core tools</p><p class="val">SQL (window functions, CTEs), Python (pandas), PySpark, Power BI (DAX), Databricks, SQL Server, scikit-learn, AWS</p></div>
+      <div><p class="big">3+ yrs</p><p>analytics at Cognizant (T-Mobile), freelance and RPI</p></div>
+      <div><p class="big">10 teams</p><p>used his Power BI cloud-cost chargeback reporting</p></div>
+      <div><p class="big">109M+</p><p>events in his largest pipeline, every removed row reconciled</p></div>
+      <div class="span"><p class="lbl">Contact</p><p class="val">hire.nikhil01@gmail.com · <a href="https://www.linkedin.com/in/nikhilshriv01" style="color:var(--accent)">LinkedIn</a> · <a href="https://github.com/NikhilShriv01" style="color:var(--accent)">GitHub</a></p></div>
+    </div>
+  </section>
+
+  <section class="sec full" id="skills">
+    <div class="side"><h2>Skills</h2><p>Tap a skill to see every project and job where I used it.</p></div>
+    <div>
+      <div class="sg"><h3>Query &amp; code</h3><div class="chips">
+        <button class="chip" data-s="sql">SQL</button>
+        <button class="chip" data-s="tsql">T-SQL</button>
+        <button class="chip" data-s="python">Python</button>
+        <button class="chip" data-s="pandas">pandas</button>
+        <button class="chip" data-s="pyspark">PySpark</button>
+        <button class="chip" data-s="dax">DAX</button>
+      </div></div>
+      <div class="sg"><h3>BI &amp; reporting</h3><div class="chips">
+        <button class="chip" data-s="powerbi">Power BI</button>
+        <button class="chip" data-s="plotly">Plotly</button>
+        <button class="chip" data-s="streamlit">Streamlit</button>
+        <button class="chip" data-s="ga">Google Analytics</button>
+        <button class="chip" data-s="meta">Meta Ads</button>
+        <button class="chip" data-s="shopify">Shopify data</button>
+      </div></div>
+      <div class="sg"><h3>Data engineering</h3><div class="chips">
+        <button class="chip" data-s="star">Star schema</button>
+        <button class="chip" data-s="etl">ETL / ELT</button>
+        <button class="chip" data-s="medallion">Medallion layers</button>
+        <button class="chip" data-s="dq">Data validation</button>
+        <button class="chip" data-s="cohort">Cohort analysis</button>
+      </div></div>
+      <div class="sg"><h3>Platforms</h3><div class="chips">
+        <button class="chip" data-s="databricks">Databricks</button>
+        <button class="chip" data-s="sqlserver">SQL Server</button>
+        <button class="chip" data-s="mysql">MySQL</button>
+        <button class="chip" data-s="duckdb">DuckDB</button>
+        <button class="chip" data-s="redshift">Redshift</button>
+        <button class="chip" data-s="aws">AWS</button>
+        <button class="chip" data-s="cloudwatch">CloudWatch</button>
+      </div></div>
+      <div class="sg"><h3>ML &amp; AI</h3><div class="chips">
+        <button class="chip" data-s="sklearn">scikit-learn</button>
+        <button class="chip" data-s="xgboost">XGBoost</button>
+        <button class="chip" data-s="calib">Calibration &amp; thresholds</button>
+        <button class="chip" data-s="langgraph">LangGraph / LangChain</button>
+        <button class="chip" data-s="fastapi">FastAPI</button>
+        <button class="chip" data-s="git">Git &amp; CI</button>
+      </div></div>
+      <div class="hint" id="hint" role="status" aria-live="polite">Numbers show how many places each skill appears below.</div>
+    </div>
+  </section>
+
+  <section class="sec full" id="work">
+    <div class="side"><h2>Selected work</h2><p>Open a row for the detail and the repository.</p></div>
+    <div class="idx">
+
+      <details class="item" open data-skills="sql tsql sqlserver star etl dq powerbi dax">
+        <summary><span class="t">Hospital Operations Intelligence System<small>Do CMS star ratings track readmissions and ER time?</small></span><span class="domain">Healthcare</span><span class="fig">29 / 1,051</span><span class="chev" aria-hidden="true"></span></summary>
+        <div class="body">
+          <div>
+            <p class="stack">SQL Server · T-SQL · Power BI</p>
+            <p>A SQL Server warehouse over 210K+ raw CMS rows: staging, a normalized store, and a five-dimension star schema, with a reconciliation step that stops the load if any hospital is dropped or duplicated.</p>
+            <p>Ratings track readmission on average, but 29 of 1,051 four- and five-star hospitals are still flagged worse than national.</p>
+            <a class="go" href="https://github.com/NikhilShriv01/HOIS-Project">View repository</a>
+          </div>
+          <div class="viz">
+            <p class="cap">Share flagged worse than national, by star rating</p>
+            <div class="vb">
+              <div>13.5%<i style="height:4.1rem"></i></div>
+              <div>9.7%<i style="height:2.95rem"></i></div>
+              <div>5.9%<i style="height:1.8rem"></i></div>
+              <div>3.3%<i style="height:1rem"></i></div>
+              <div>1.4%<i style="height:.43rem"></i></div>
+            </div>
+            <div class="vl"><span>1★</span><span>2★</span><span>3★</span><span>4★</span><span>5★</span></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="item" data-skills="pyspark databricks sql medallion etl dq cohort powerbi dax">
+        <summary><span class="t">E-Commerce Funnel &amp; Retention<small>Where do shoppers drop out, and do they come back?</small></span><span class="domain">E-commerce</span><span class="fig">109M+ rows</span><span class="chev" aria-hidden="true"></span></summary>
+        <div class="body">
+          <div>
+            <p class="stack">PySpark · Databricks · Delta · Power BI</p>
+            <p>A bronze-silver-gold pipeline over two months of clickstream events, with all 130,751 rows removed in cleaning accounted for. Session, category and cohort-retention marts feed a four-page Power BI report.</p>
+            <p>Only 10% of sessions reach the cart, while 41% of carting sessions buy. Carts left in sessions with no purchase held $648M in list-price value.</p>
+            <a class="go" href="https://github.com/NikhilShriv01/ecommerce-funnel-analytics">View repository</a>
+          </div>
+          <div class="viz">
+            <p class="cap">Sessions, Oct–Nov 2019</p>
+            <div class="hb"><span>All sessions</span><div class="tr"><div class="fl" style="width:100%"></div></div><span class="num">23.02M</span></div>
+            <div class="hb"><span>Added to cart</span><div class="tr"><div class="fl" style="width:10.06%"></div></div><span class="num">2.32M</span></div>
+            <div class="hb"><span>Then bought</span><div class="tr"><div class="fl ac" style="width:4.08%"></div></div><span class="num">0.94M</span></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="item" data-skills="python pandas sql mysql powerbi dax dq">
+        <summary><span class="t">Customer Segmentation &amp; RFM<small>Which customers matter most, and who is slipping away?</small></span><span class="domain">Retail</span><span class="fig">6% → 43%</span><span class="chev" aria-hidden="true"></span></summary>
+        <div class="body">
+          <div>
+            <p class="stack">Python · MySQL · Power BI</p>
+            <p>Recency, frequency and spend scoring over 525K+ invoice lines into ten segments, with SQL views that turn each segment into a recommended action.</p>
+            <p>275 Champions, 6% of 4,312 customers, bring in 43% of identified revenue.</p>
+            <a class="go" href="https://github.com/NikhilShriv01/rfm-customer-segmentation">View repository</a>
+          </div>
+          <div class="viz">
+            <p class="cap">Champions' share</p>
+            <div class="hb"><span>Customers</span><div class="tr"><div class="fl ac" style="width:6.38%"></div></div><span class="num">6.4%</span></div>
+            <div class="hb"><span>Revenue</span><div class="tr"><div class="fl ac" style="width:43.27%"></div></div><span class="num">43.3%</span></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="item" data-skills="python pandas sql duckdb langgraph plotly dq">
+        <summary><span class="t">Fraud Analytics Workflow<small>How well does the existing fraud rule actually work?</small></span><span class="domain">Payments</span><span class="fig">16 / 8,213</span><span class="chev" aria-hidden="true"></span></summary>
+        <div class="body">
+          <div>
+            <p class="stack">Python · DuckDB · LangGraph · Plotly</p>
+            <p>An analysis loop over 6.36M PaySim transactions. SQL computes every figure; an LLM plans follow-up queries and drafts the report, and a final check confirms each number in it matches a SQL result.</p>
+            <p>The existing rule flagged 16 transactions, all real fraud, and missed 8,197.</p>
+            <a class="go" href="https://github.com/NikhilShriv01/fraud-analytics-workflow">View repository</a>
+          </div>
+          <div class="viz">
+            <p class="cap">Labeled frauds</p>
+            <div class="hb"><span>Caught</span><div class="tr"><div class="fl ac" style="width:max(3px,0.195%)"></div></div><span class="num">16</span></div>
+            <div class="hb"><span>Missed</span><div class="tr"><div class="fl" style="width:99.8%"></div></div><span class="num">8,197</span></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="item" data-skills="python pandas sklearn calib fastapi streamlit git">
+        <summary><span class="t">Credit Default Risk Model<small>Who defaults next month, and how many should we review?</small></span><span class="domain">Lending</span><span class="fig">0.782 AUC</span><span class="chev" aria-hidden="true"></span></summary>
+        <div class="body">
+          <div>
+            <p class="stack">Python · scikit-learn · FastAPI · Streamlit · GitHub Actions</p>
+            <p>Default prediction for 30,000 credit-card customers. Splits are grouped so duplicate profiles can't leak between train and test, and the review threshold comes from an explicit cost of errors. Served through a FastAPI endpoint with drift checks, a subgroup error audit and CI tests.</p>
+            <a class="go" href="https://github.com/NikhilShriv01/credit-risk-modeling">View repository</a>
+          </div>
+          <div class="viz">
+            <p class="cap">A missed default costs this much more than a false alert:</p>
+            <div class="toggle" role="group" aria-label="Cost ratio">
+              <button type="button" data-r="2" aria-pressed="false">2×</button>
+              <button type="button" data-r="5" aria-pressed="true">5×</button>
+              <button type="button" data-r="10" aria-pressed="false">10×</button>
+            </div>
+            <div class="hb"><span>Caught</span><div class="tr"><div class="fl ac" id="cr-a" style="width:81.1%"></div></div><span class="num" id="cr-an">81.1%</span></div>
+            <div class="hb"><span>Reviewed</span><div class="tr"><div class="fl" id="cr-b" style="width:53.1%"></div></div><span class="num" id="cr-bn">53.1%</span></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="item" data-skills="python pandas sklearn xgboost calib">
+        <summary><span class="t">Manufacturing Failure Prediction<small>Can sensor data flag failing semiconductor runs?</small></span><span class="domain">Manufacturing</span><span class="fig">0.73 AUC</span><span class="chev" aria-hidden="true"></span></summary>
+        <div class="body">
+          <div>
+            <p class="stack">Python · scikit-learn · XGBoost</p>
+            <p>590 sensor readings with a 6.6% failure rate. Logistic regression, random forest and XGBoost compared, tuned toward catching failures: 66.7% recall at 0.73 AUC.</p>
+            <a class="go" href="https://github.com/NikhilShriv01/secom-manufacturing-quality-control">View repository</a>
+          </div>
+        </div>
+      </details>
+
+      <details class="item" data-skills="python fastapi langgraph git">
+        <summary><span class="t">MAARS<small>A multi-agent research app, built end to end</small></span><span class="domain">AI tooling</span><span class="fig">Full-stack</span><span class="chev" aria-hidden="true"></span></summary>
+        <div class="body">
+          <div>
+            <p class="stack">FastAPI · LangChain · Next.js</p>
+            <p>Multi-agent research workflows with authentication, live web retrieval and PDF/DOCX export.</p>
+            <a class="go" href="https://github.com/NikhilShriv01/Maars-Enterprise">View repository</a>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="sec full" id="experience">
+    <div class="side"><h2>Experience</h2></div>
+    <div>
+      <div class="job" data-skills="python pandas powerbi dax dq">
+        <h3>Graduate Assistant, Data &amp; Analytics</h3><span class="when">2025 – now</span>
+        <span class="org">Rensselaer Polytechnic Institute</span>
+        <ul>
+          <li>Rebuilt the Student Success Center intervention pipeline in Python across 9,000+ at-risk flags and tutoring records, with a self-refreshing Power BI model.</li>
+          <li>Found and corrected two defects in the conversion metric the Center had been reporting.</li>
+        </ul>
+      </div>
+      <div class="job" data-skills="powerbi dax ga meta shopify cohort">
+        <h3>Marketing Analytics Consultant</h3><span class="when">2024 – 2025</span>
+        <span class="org">LeanLines, DTC athleisure · Freelance</span>
+        <ul>
+          <li>Replaced a manually assembled spreadsheet with a weekly Power BI view of Shopify, Google Analytics and Meta Ads data.</li>
+          <li>Compared acquisition cost across channels, using purchase cohorts to separate one-time from returning buyers.</li>
+        </ul>
+      </div>
+      <div class="job" data-skills="sql powerbi dax redshift aws cloudwatch dq etl">
+        <h3>Analyst, Data &amp; Cloud Reporting</h3><span class="when">2022 – 2024</span>
+        <span class="org">Cognizant · Client: T-Mobile</span>
+        <ul>
+          <li>Built Power BI chargeback reporting used by 10 teams, with DAX and SQL views splitting AWS costs by account and service.</li>
+          <li>Audited EC2, S3, RDS, Redshift and related usage for rightsizing, and presented the findings in cost reviews for platform leadership.</li>
+          <li>Automated SQL validation checks and CloudWatch alarms to catch data-feed problems before they reached reports.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec full" id="learning">
+    <div class="side"><h2>Learning log</h2><p>What I picked up, month by month, newest first.</p></div>
+    <div>
+      <ol class="log">
+        <li><span class="m">Nov 2026</span><div class="e"><b>Rebuilt the hospital warehouse</b><p>Found a join that counted some hospitals up to 22 times, fixed it, and made the load fail if row counts ever disagree.</p><div class="new"><span>null-safe joins</span><span>load reconciliation</span></div></div></li>
+        <li><span class="m">Oct 2026</span><div class="e"><b>Rebuilt the RFM segmentation</b><p>Found that anonymous rows had become 100,000+ fake customers, re-scored 4,312 real ones, and reworked the SQL Pareto query.</p><div class="new"><span>window frames</span><span>segment rule design</span></div></div></li>
+        <li><span class="m">Sep 2026</span><div class="e"><b>Credit risk model, from split to service</b><p>Grouped splits, probability calibration, cost-based thresholds, drift monitoring, an API and CI tests.</p><div class="new"><span>FastAPI</span><span>PSI monitoring</span><span>GitHub Actions</span></div></div></li>
+        <li><span class="m">Sep 2026</span><div class="e"><b>Agentic analysis with guardrails</b><p>A LangGraph loop where an LLM writes and reviews, and deterministic checks keep every number tied to SQL.</p><div class="new"><span>LangGraph</span><span>DuckDB</span><span>structured outputs</span></div></div></li>
+        <li><span class="m">Aug 2026</span><div class="e"><b>Spark at scale</b><p>A bronze-silver-gold pipeline on Databricks over 109M+ events.</p><div class="new"><span>PySpark</span><span>Databricks</span><span>Delta</span></div></div></li>
+        <li class="past"><span class="m">Aug 2025</span><div class="e"><b>Started the M.S. at RPI</b><p>Data science, statistical analysis and data resource management coursework, alongside a graduate analytics role.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec full">
+    <div class="side"><h2>Education</h2></div>
+    <div>
+      <div class="edu"><h3>M.S. Information Technology</h3><span class="when">Dec 2026</span><p>Rensselaer Polytechnic Institute · GPA 3.5</p></div>
+      <div class="edu"><h3>B.Tech Information Technology</h3><span class="when">2022</span><p>Kalinga Institute of Industrial Technology · GPA 7.86 / 10</p></div>
+      <div class="edu"><h3><a href="https://learn.microsoft.com/en-us/users/nikhilshrivastava-5918/credentials/c855a53d9ac466e0">Microsoft Certified: Power BI Data Analyst ↗</a></h3><span class="when">PL-300</span><p>Verifiable on Microsoft Learn</p></div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <p>Get in touch</p>
+    <button id="mail" type="button" aria-label="Copy email address">hire.nikhil01@gmail.com</button><span id="copied" role="status" aria-live="polite"></span>
+    <div class="links">
+      <a href="https://www.linkedin.com/in/nikhilshriv01">LinkedIn ↗</a>
+      <a href="https://github.com/NikhilShriv01">GitHub ↗</a>
+    </div>
+    <footer>Click the address to copy it.</footer>
+  </section>
+</div>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  try{var s=localStorage.getItem('ns-theme'); if(s==='dark'||s==='light') root.setAttribute('data-theme',s);}catch(e){}
+  document.getElementById('theme').addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+    var nx=cur==='dark'?'light':'dark'; root.setAttribute('data-theme',nx);
+    try{localStorage.setItem('ns-theme',nx);}catch(e){}
+  });
+
+  // full / 30-second view
+  var vf=document.getElementById('v-full'), vs=document.getElementById('v-short');
+  function view(short){
+    document.body.classList.toggle('short',short);
+    vf.setAttribute('aria-pressed',short?'false':'true'); vs.setAttribute('aria-pressed',short?'true':'false');
+    try{localStorage.setItem('ns-view',short?'short':'full');}catch(e){}
+  }
+  vf.addEventListener('click',function(){view(false);});
+  vs.addEventListener('click',function(){view(true);});
+  try{ if(localStorage.getItem('ns-view')==='short') view(true); }catch(e){}
+
+  // skill explorer
+  var places=[].slice.call(document.querySelectorAll('[data-skills]'));
+  var chips=[].slice.call(document.querySelectorAll('.chip[data-s]'));
+  var hint=document.getElementById('hint'), base=hint.textContent;
+  function users(s){return places.filter(function(p){return p.dataset.skills.split(' ').indexOf(s)>=0;});}
+  chips.forEach(function(c){
+    var n=users(c.dataset.s).length;
+    var i=document.createElement('i'); i.textContent=n; c.appendChild(i);
+    c.setAttribute('aria-pressed','false'); c.type='button';
+  });
+  function clear(){
+    document.body.classList.remove('filtering');
+    places.forEach(function(p){p.classList.remove('hit','miss');});
+    chips.forEach(function(x){x.setAttribute('aria-pressed','false');});
+    hint.textContent=base;
+  }
+  chips.forEach(function(c){c.addEventListener('click',function(){
+    if(c.getAttribute('aria-pressed')==='true'){clear(); return;}
+    var hits=users(c.dataset.s);
+    chips.forEach(function(x){x.setAttribute('aria-pressed',x===c?'true':'false');});
+    document.body.classList.add('filtering');
+    places.forEach(function(p){var h=hits.indexOf(p)>=0; p.classList.toggle('hit',h); p.classList.toggle('miss',!h);});
+    var names=hits.map(function(p){var t=p.querySelector('.t'); return t?t.firstChild.textContent.trim():p.querySelector('h3').textContent.trim();});
+    hint.innerHTML='';
+    var b=document.createElement('b'); b.textContent=c.firstChild.textContent.trim();
+    hint.appendChild(b);
+    hint.appendChild(document.createTextNode(' · used in '+hits.length+(hits.length===1?' place: ':' places: ')+names.join(', ')));
+    var x=document.createElement('button'); x.id='clear'; x.type='button'; x.textContent='Clear';
+    x.addEventListener('click',clear); hint.appendChild(x);
+  });});
+
+  // copy email
+  var mail=document.getElementById('mail'), note=document.getElementById('copied');
+  mail.addEventListener('click',function(){
+    function done(){note.textContent='Copied'; setTimeout(function(){note.textContent='';},1800);}
+    function sel(){var r=document.createRange(); r.selectNodeContents(mail); var s=getSelection(); s.removeAllRanges(); s.addRange(r); note.textContent='Selected, press copy';}
+    if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText('hire.nikhil01@gmail.com').then(done,sel); else sel();
+  });
+
+  // credit-risk cost ratio (test-set values from reports/metrics.json)
+  var R={'2':[55.2,23.1],'5':[81.1,53.1],'10':[94.5,77.1]};
+  var bs=[].slice.call(document.querySelectorAll('.toggle button'));
+  bs.forEach(function(b){b.addEventListener('click',function(){
+    var v=R[b.dataset.r];
+    bs.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
+    document.getElementById('cr-a').style.width=v[0]+'%'; document.getElementById('cr-an').textContent=v[0].toFixed(1)+'%';
+    document.getElementById('cr-b').style.width=v[1]+'%'; document.getElementById('cr-bn').textContent=v[1].toFixed(1)+'%';
+  });});
+})();
+</script>
+
+</body>
+</html>
